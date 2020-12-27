@@ -1,10 +1,12 @@
+""" Schema extra example
+    run: uvicorn example6:app
+"""
 from typing import Optional
 
 from fastapi import FastAPI, Body
 from pydantic import BaseModel, Field
 
 app = FastAPI()
-
 
 class Item(BaseModel):
     name: str = Field(..., example="Foo")
@@ -27,12 +29,11 @@ class Item(BaseModel):
     description: Optional[str] = None
     price: float
     tax: Optional[float] = None """
-    
+
 @app.put("/items/{item_id}")
 async def update_item(item_id: int, item: Item):
     results = {"item_id": item_id, "item": item}
     return results
-
 
 """ @app.put("/items/{item_id}")
 async def update_item(
